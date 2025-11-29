@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Historias{% endblock %}
+
+{% block content %}
+<h2>Historias recientes</h2>
+
+{% if historias %}
+  <ul style="list-style:none; padding:0;">
+    {% for h in historias %}
+      <li style="border:1px solid #ddd; padding:10px; margin-bottom:8px;">
+        <strong>{{ h.usuario.user.username }}</strong><br>
+        <small>{{ h.fecha_creacion|date:"d M Y H:i" }} — Tipo: {{ h.get_tipo_display }}</small>
+
+        {% if h.tipo == 'texto' %}
+          <p>{{ h.contenido|truncatechars:140 }}</p>
+        {% elif h.tipo == 'imagen' or h.tipo == 'video' %}
+          {% if h.archivo %}
+            <p>
+              <a href="{{ h.archivo.url }}">Ver archivo adjunto</a>
+            </p>
+          {% endif %}
+        {% endif %}
+
+        <a href="{% url 'detalle-historia' h.pk %}">Ver historia completa</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No hay historias disponibles.</p>
+{% endif %}
+
+{% endblock %}

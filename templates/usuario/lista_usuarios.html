@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Usuarios{% endblock %}
+{% block content %}
+<h2>Usuarios registrados</h2>
+<div id="usuarios-list">
+<!-- Ejemplo render estático. Reemplaza por un loop desde la vista si usas render() -->
+{% if usuarios %}
+<ul class="list">
+{% for u in usuarios %}
+<li class="list-item">
+<img src="{% static 'img/placeholder.png' %}" alt="avatar" class="avatar-sm">
+<div>
+<strong>{{ u.user.username }}</strong>
+<div class="muted">{{ u.ciudad }}, {{ u.pais }}</div>
+</div>
+<a class="small" href="/usuario/{{ u.id }}">Ver perfil</a>
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No hay usuarios disponibles.</p>
+{% endif %}
+</div>
+{% endblock %}

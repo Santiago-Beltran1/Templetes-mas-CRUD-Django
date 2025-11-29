@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<section class="home-welcome">
+    <h2>Bienvenido a la Red Social</h2>
+    <p>Este es el proyecto del examen donde podrás acceder a las siguientes secciones:</p>
+
+    <ul class="home-links">
+        <li><a href="/usuario/lista/">Gestión de Usuarios</a></li>
+        <li><a href="/publicaciones/lista/">Publicaciones</a></li>
+        <li><a href="/mensajes/lista/">Mensajes</a></li>
+        <li><a href="/relacion/lista/">Relaciones (amistades / seguimiento)</a></li>
+        <li><a href="/grupos/lista/">Grupos</a></li>
+        <li><a href="/historias/lista/">Historias</a></li>
+    </ul>
+
+    <p>Selecciona una sección del menú superior o de esta lista.</p>
+</section>
+{% endblock %}

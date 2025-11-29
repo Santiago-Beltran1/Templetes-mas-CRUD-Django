@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Reacción{% endblock %}
+
+{% block content %}
+<h2>{{ like.usuario.user.username }} reaccionó con {{ like.get_tipo_display }}</h2>
+<p>En la publicación: {{ like.publicacion }}</p>
+<p>Fecha: {{ like.fecha_creacion|date:"d M Y H:i" }}</p>
+
+<p>
+    <a href="{% url 'lista-likes' %}">Volver a la lista de reacciones</a>
+</p>
+{% endblock %}

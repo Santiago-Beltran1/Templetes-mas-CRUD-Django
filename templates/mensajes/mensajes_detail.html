@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mensaje{% endblock %}
+
+{% block content %}
+<h2>Detalle del mensaje</h2>
+
+<div style="border:1px solid #ccc; padding:12px;">
+    <p><strong>De:</strong> {{ mensaje.remitente.user.username }}</p>
+    <p><strong>Para:</strong> {{ mensaje.destinatario.user.username }}</p>
+    <p><strong>Enviado:</strong> {{ mensaje.fecha_envio|date:"d M Y H:i" }}</p>
+
+    <hr>
+
+    <p>{{ mensaje.contenido }}</p>
+
+    {% if mensaje.archivo_adjunto %}
+        <p>
+            <a href="{{ mensaje.archivo_adjunto.url }}">Descargar archivo adjunto</a>
+        </p>
+    {% endif %}
+
+    <p style="margin-top:10px;">
+        <a href="{% url 'lista-mensajes' %}">Volver a la bandeja</a>
+    </p>
+</div>
+{% endblock %}

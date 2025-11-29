@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Miembros{% endblock %}
+
+{% block content %}
+<h2>Miembros de todos los grupos</h2>
+
+{% if miembros %}
+  <ul style="list-style:none; padding:0;">
+    {% for m in miembros %}
+      <li style="border:1px solid #ddd; padding:10px; margin-bottom:8px;">
+        <strong>{{ m.usuario.user.username }}</strong><br>
+        <small>Grupo: {{ m.grupo.nombre }} — Rol: {{ m.get_rol_display }}</small><br>
+        <a href="{% url 'detalle-miembro' m.pk %}">Ver detalle del miembro</a> |
+        <a href="{% url 'detalle-grupo' m.grupo.pk %}">Ir al grupo</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No hay miembros registrados.</p>
+{% endif %}
+
+{% endblock %}

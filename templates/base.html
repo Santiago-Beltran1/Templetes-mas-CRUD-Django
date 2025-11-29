@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Examen Redes Sociales{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <h1>Red Social - Examen</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/usuario/lista/">Usuarios</a>
+            <a href="/publicaciones/lista/">Publicaciones</a>
+            <a href="/mensajes/lista/">Mensajes</a>
+            <a href="/relacion/lista/">Relaciones</a>
+            <a href="/grupos/lista/">Grupos</a>
+            <a href="/historias/lista/">Historias</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <p>&copy; 2025 Red Social - Examen. DAVID SANTIAGO BELTRAN PEDRAZA - FICHA: 3203084</p>
+</footer>
+
+</body>
+</html>

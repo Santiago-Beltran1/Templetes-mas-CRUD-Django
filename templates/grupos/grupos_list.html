@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Grupos{% endblock %}
+
+{% block content %}
+<h2>Grupos</h2>
+
+{% if grupos %}
+  <ul style="list-style:none; padding:0;">
+    {% for g in grupos %}
+      <li style="border:1px solid #ddd; padding:10px; margin-bottom:8px;">
+        <div style="display:flex; gap:10px; align-items:center;">
+          {% if g.avatar %}
+            <img src="{{ g.avatar.url }}" alt="{{ g.nombre }}" width="60" height="60" style="object-fit:cover; border-radius:6px;">
+          {% else %}
+            <div style="width:60px; height:60px; background:#f0f0f0; display:flex; align-items:center; justify-content:center; border-radius:6px;">No avatar</div>
+          {% endif %}
+          <div>
+            <strong>{{ g.nombre }}</strong><br>
+            <small>{{ g.fecha_creacion|date:"d M Y H:i" }} — {{ g.get_visibilidad_display }}</small>
+          </div>
+        </div>
+
+        <p style="margin-top:8px;">{{ g.descripcion|truncatechars:140 }}</p>
+
+        <div>
+          <!-- Aquí ya NO usamos namespace -->
+          <a href="{% url 'detalle-grupo' g.pk %}">Ver grupo</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No hay grupos creados.</p>
+{% endif %}
+
+{% endblock %}

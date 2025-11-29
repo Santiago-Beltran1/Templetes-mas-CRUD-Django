@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfiles{% endblock %}
+
+{% block content %}
+<h2>Perfiles</h2>
+
+{% if perfiles %}
+<ul>
+    {% for p in perfiles %}
+    <li style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+        <img src="{{ p.avatar.url }}" alt="Avatar" width="50" style="vertical-align:middle;">
+        <strong>{{ p.usuario.user.username }}</strong>
+        <a href="{% url 'detalle-perfil' p.pk %}">Ver perfil</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay perfiles registrados.</p>
+{% endif %}
+
+{% endblock %}

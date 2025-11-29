@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Relación - Detalle{% endblock %}
+
+{% block content %}
+<h2>Detalle de la relación</h2>
+
+<div style="border:1px solid #ddd; padding:12px;">
+  <p><strong>ID:</strong> {{ seguimiento.pk }}</p>
+  <p><strong>Seguidor:</strong> {{ seguimiento.seguidor.user.username }}</p>
+  <p><strong>Seguido:</strong> {{ seguimiento.seguido.user.username }}</p>
+  <p><strong>Fecha de seguimiento:</strong> {{ seguimiento.fecha_seguimiento|date:"d M Y H:i" }}</p>
+  <p><strong>Notificaciones activas:</strong> {{ seguimiento.notificaciones_activas }}</p>
+
+  <p style="margin-top:10px;">
+    <a href="{% url 'relacion:lista-relaciones' %}">Volver a la lista</a>
+  </p>
+</div>
+{% endblock %}

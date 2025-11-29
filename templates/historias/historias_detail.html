@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Detalle de la historia{% endblock %}
+
+{% block content %}
+<h2>Historia de {{ historia.usuario.user.username }}</h2>
+
+<p><strong>Tipo:</strong> {{ historia.get_tipo_display }}</p>
+<p><strong>Creada:</strong> {{ historia.fecha_creacion|date:"d M Y H:i" }}</p>
+<p><strong>Expira:</strong> {{ historia.fecha_expiracion|date:"d M Y H:i" }}</p>
+
+{% if historia.tipo == 'texto' %}
+  <p>{{ historia.contenido }}</p>
+{% elif historia.tipo == 'imagen' %}
+  {% if historia.archivo %}
+    <img src="{{ historia.archivo.url }}" alt="Imagen historia" style="max-width:300px; margin-top:10px;">
+  {% endif %}
+{% elif historia.tipo == 'video' %}
+  {% if historia.archivo %}
+    <video width="320" height="240" controls>
+      <source src="{{ historia.archivo.url }}">
+      Tu navegador no soporta video.
+    </video>
+  {% endif %}
+{% endif %}
+
+<h3>Vistas</h3>
+{% if vistas %}
+  <ul style="list-style:none; padding:0;">
+    {% for v in vistas %}
+      <li>{{ v.usuario.user.username }} — {{ v.fecha_vista|date:"d M Y H:i" }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Aún no ha sido vista por nadie.</p>
+{% endif %}
+
+<p style="margin-top:12px;">
+  <a href="{% url 'lista-historias' %}">Volver a la lista de historias</a>
+</p>
+
+{% endblock %}

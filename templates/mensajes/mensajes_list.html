@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mensajes{% endblock %}
+
+{% block content %}
+<h2>Mensajes</h2>
+
+{% if mensajes %}
+    <ul style="list-style:none; padding:0;">
+        {% for m in mensajes %}
+        <li style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+            <strong>De:</strong> {{ m.remitente.user.username }}<br>
+            <strong>Para:</strong> {{ m.destinatario.user.username }}<br>
+            <span>{{ m.fecha_envio|date:"d M Y H:i" }}</span>
+
+            <p style="margin-top:6px;">
+                {{ m.contenido|truncatechars:80 }}
+            </p>
+
+            <a href="{% url 'detalle-mensaje' m.pk %}">Ver mensaje completo</a>
+
+                Ver mensaje completo
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay mensajes.</p>
+{% endif %}
+
+{% endblock %}

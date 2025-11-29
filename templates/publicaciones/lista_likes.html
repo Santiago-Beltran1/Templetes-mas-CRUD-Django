@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Reacciones{% endblock %}
+
+{% block content %}
+<h2>Reacciones</h2>
+
+{% if likes %}
+<ul>
+    {% for l in likes %}
+    <li style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+        <strong>{{ l.usuario.user.username }}</strong> reaccionó con <strong>{{ l.get_tipo_display }}</strong> en <em>{{ l.publicacion }}</em><br>
+        <span>{{ l.fecha_creacion|date:"d M Y H:i" }}</span>
+        <a href="{% url 'detalle-like' l.pk %}">Ver reacción completa</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay reacciones.</p>
+{% endif %}
+
+{% endblock %}

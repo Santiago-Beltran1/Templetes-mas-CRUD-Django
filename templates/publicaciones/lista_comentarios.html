@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Comentarios{% endblock %}
+
+{% block content %}
+<h2>Comentarios</h2>
+
+{% if comentarios %}
+<ul>
+    {% for c in comentarios %}
+    <li style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+        <strong>{{ c.usuario.user.username }}</strong> en <em>{{ c.publicacion }}</em><br>
+        <span>{{ c.fecha_creacion|date:"d M Y H:i" }}</span>
+        <p>{{ c.contenido }}</p>
+        <a href="{% url 'detalle-comentario' c.pk %}">Ver comentario completo</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay comentarios.</p>
+{% endif %}
+
+{% endblock %}

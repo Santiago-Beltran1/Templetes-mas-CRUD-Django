@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil de {{ perfil.usuario.user.username }}{% endblock %}
+
+{% block content %}
+<h2>Perfil de {{ perfil.usuario.user.username }}</h2>
+
+<img src="{{ perfil.avatar.url }}" alt="Avatar" width="150">
+<img src="{{ perfil.portada.url }}" alt="Portada" width="300">
+
+<p><strong>Género:</strong> {{ perfil.get_genero_display }}</p>
+<p><strong>Intereses:</strong> {{ perfil.interes }}</p>
+<p><strong>Educación:</strong> {{ perfil.educacion }}</p>
+<p><strong>Trabajo:</strong> {{ perfil.trabajo }}</p>
+
+<p>
+    <a href="{% url 'lista-perfiles' %}">Volver a la lista de perfiles</a>
+</p>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Comentario{% endblock %}
+
+{% block content %}
+<h2>Comentario de {{ comentario.usuario.user.username }}</h2>
+<p>En la publicación: {{ comentario.publicacion }}</p>
+<p>{{ comentario.contenido }}</p>
+<p>Fecha: {{ comentario.fecha_creacion|date:"d M Y H:i" }}</p>
+
+<p>
+    <a href="{% url 'lista-comentarios' %}">Volver a la lista de comentarios</a>
+</p>
+{% endblock %}
