@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<h1>Dashboard - Resumen</h1>
+
+<div class="cards-row">
+  <div class="card">
+    <h3>Total usuarios</h3>
+    <p class="card-number">{{ total_users }}</p>
+  </div>
+  <div class="card">
+    <h3>Perfiles</h3>
+    <p class="card-number">{{ total_perfiles }}</p>
+  </div>
+  <div class="card">
+    <h3>Publicaciones</h3>
+    <p class="card-number">{{ total_publicaciones }}</p>
+  </div>
+  <div class="card">
+    <h3>Comentarios</h3>
+    <p class="card-number">{{ total_comentarios }}</p>
+  </div>
+</div>
+
+<hr>
+
+<div class="grid-charts">
+  <div class="chart-card">
+    <h3>Usuarios por ciudad (Top 7)</h3>
+    <div class="chart-wrapper"><canvas id="chartCiudades"></canvas></div>
+  </div>
+
+  <div class="chart-card">
+    <h3>Publicaciones últimas 14 días</h3>
+    <div class="chart-wrapper"><canvas id="chartFechas"></canvas></div>
+  </div>
+
+  <div class="chart-card full-width">
+    <h3>Top 5 autores (publicaciones)</h3>
+    <div class="chart-wrapper small-height"><canvas id="chartAutores"></canvas></div>
+  </div>
+</div>
+
+<hr>
+<p>
+  <a href="{% url 'dashboard:usuarios_table' %}">👉 Ver tabla completa de usuarios</a> |
+  <a href="{% url 'dashboard:publicaciones_table' %}">👉 Ver tabla de publicaciones</a>
+</p>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  function safeParse(s) {
+    try { return JSON.parse(s); } catch (e) { return []; }
+  }
+
+  const ciudadesLabels = safeParse("{{ ciudades_labels|default:'[]'|escapejs }}");
+  const ciudadesData   = safeParse("{{ ciudades_data|default:'[]'|escapejs }}");
+  const fechasLabels   = safeParse("{{ fechas_labels|default:'[]'|escapejs }}");
+  const fechasData     = safeParse("{{ fechas_data|default:'[]'|escapejs }}");
+  const autoresLabels  = safeParse("{{ autores_labels|default:'[]'|escapejs }}");
+  const autoresData    = safeParse("{{ autores_data|default:'[]'|escapejs }}");
+
+  // Reducir / limitar arrays por seguridad a tamaños pequeños
+  const maxCiudades = 7;
+  const maxFechas = 14; // últimas 14 fechas
+  const maxAutores = 5;
+
+  const cLabels = ciudadesLabels.slice(0, maxCiudades);
+  const cData   = ciudadesData.slice(0, maxCiudades);
+  const fLabels = fechasLabels.slice(-maxFechas);
+  const fData   = fechasData.slice(-maxFechas);
+  const aLabels = autoresLabels.slice(0, maxAutores);
+  const aData   = autoresData.slice(0, maxAutores);
+
+  // Opciones comunes
+  const commonOpts = { responsive: true, maintainAspectRatio: false };
+
+  // Chart: Ciudades
+  const ctx1 = document.getElementById('chartCiudades').getContext('2d');
+  new Chart(ctx1, {
+    type: 'bar',
+    data: { labels: cLabels, datasets: [{ label: 'Usuarios', data: cData, borderWidth: 1 }] },
+    options: commonOpts
+  });
+
+  // Chart: Fechas (línea)
+  const ctx2 = document.getElementById('chartFechas').getContext('2d');
+  new Chart(ctx2, {
+    type: 'line',
+    data: { labels: fLabels, datasets: [{ label: 'Publicaciones', data: fData, borderWidth: 2, tension: 0.25 }]},
+    options: commonOpts
+  });
+
+  // Chart: Autores top (horizontal)
+  const ctx3 = document.getElementById('chartAutores').getContext('2d');
+  new Chart(ctx3, {
+    type: 'bar',
+    data: { labels: aLabels, datasets: [{ label: 'Publicaciones', data: aData, borderWidth: 1 }]},
+    options: Object.assign({}, commonOpts, { indexAxis: 'y' })
+  });
+});
+</script>
+{% endblock %}

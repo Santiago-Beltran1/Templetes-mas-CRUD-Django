@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Publicaciones</h1>
+<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%;">
+  <thead style="background:#eee;">
+    <tr>
+      <th>ID</th><th>Usuario</th><th>Tipo</th><th>Visibilidad</th><th>Fecha</th><th>Contenido</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in posts %}
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.usuario }}</td>
+      <td>{{ p.tipo }}</td>
+      <td>{{ p.visibilidad }}</td>
+      <td>{{ p.fecha }}</td>
+      <td>{{ p.contenido }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

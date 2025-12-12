@@ -5,7 +5,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-)m&66m%bpb2slgt@tu@a6o3)py9x6%z9m$-pfljdgal4nhww3*'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '.ngrok-free.dev',  # Wildcard para todos los subdominios ngrok-free
+]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,6 +26,9 @@ INSTALLED_APPS = [
     'mensajes',
     'grupos',
     'historias',
+    'chatbot',
+    'dashboard',
+
 ]
 
 MIDDLEWARE = [
@@ -92,3 +100,11 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'pedrazasantiago837@gmail.com'        # reemplaza con tu correo
+EMAIL_HOST_PASSWORD = 'gybv adpt jnin lsew'        # App Password de Gmail
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

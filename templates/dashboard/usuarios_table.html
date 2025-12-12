@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Usuarios</h1>
+<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%;">
+  <thead style="background:#eee;">
+    <tr>
+      <th>ID</th><th>Usuario</th><th>Nombre</th><th>Email</th><th>Fecha Nac</th><th>Ciudad</th><th>Superuser</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for u in usuarios %}
+    <tr>
+      <td>{{ u.id }}</td>
+      <td>{{ u.username }}</td>
+      <td>{{ u.first_name }} {{ u.last_name }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.fecha_nacimiento }}</td>
+      <td>{{ u.ciudad }}</td>
+      <td>{{ u.is_superuser }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

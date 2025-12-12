@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 # importamos home desde la app usuario
 from usuario.views import home
+from chatbot.views_pdf import descargar_certificado
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +36,14 @@ urlpatterns = [
     path('mensajes/', include('mensajes.urls')),
     path('grupos/', include('grupos.urls')),
     path('historias/', include('historias.urls')),
+
+    # en examen_clase/urls.py
+    path('chatbot/', include('chatbot.urls')),
+
+    path('certificado/<int:curso_id>/', descargar_certificado, name='descargar_certificado'),
+    path('accounts/', include('django.contrib.auth.urls')),
+
+    path('dashboard/', include('dashboard.urls', namespace='dashboard')),
 ]
 
 if settings.DEBUG:

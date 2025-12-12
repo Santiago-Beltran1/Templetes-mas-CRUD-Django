@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Chatbot{% endblock %}
+
+{% block content %}
+<div class="chatbot-page">
+    <div class="chatbot-container">
+        <h1>Asistente Virtual de Telegram</h1>
+        
+        <div class="chatbot-instructions">
+            <p><strong>¡Tu bot está funcionando perfectamente!</strong></p>
+            <ol>
+                <li>Abre <strong>Telegram Web</strong> o la app</li>
+                <li>Busca tu bot: <code>@TuNombreDeBot</code></li>
+                <li>Escribe <code>/start</code></li>
+                <li>¡Disfruta el menú interactivo!</li>
+            </ol>
+        </div>
+
+        <div class="chatbot-actions">
+            <a href="https://t.me/Higor2_bot" class="btn-telegram" target="_blank">
+                Abrir Telegram Web
+            </a>
+            <a href="/webhook/" class="btn-webhook">
+                🔧 Ver Webhook (Admin)
+            </a>
+        </div>
+
+        <div class="chatbot-status">
+            <h3>✅ Estado del Bot</h3>
+            <ul>
+                <li>✅ Webhook configurado</li>
+                <li>✅ Token válido</li>
+                <li>✅ Recibiendo mensajes (200 OK)</li>
+                <li>✅ Respuestas automáticas</li>
+            </ul>
+        </div>
+
+<!-- template donde quieras el botón (por ejemplo templates/chatbot/boton_reporte.html) -->
+        <form action="{% url 'descargar_certificado' curso_id=1 %}" method="get" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Descargar Reporte Administrador</button>
+        </form>
+
+
+    </div>
+</div>
+{% endblock %}
