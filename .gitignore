@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/windows,django
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,django
 
@@ -198,3 +199,26 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,django
+=======
+__pycache__/
+*.py[cod]
+
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+db.sqlite3
+
+staticfiles/
+static_root/
+
+media/
+
+*.log
+
+.vscode/
+.idea/
+*.swp
+>>>>>>> fe8b44c7064f3af77ca1aa371fe3828d0de7ad55
